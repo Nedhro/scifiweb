@@ -107,6 +107,7 @@ public class UserDao {
     }
 
     public boolean check(String email, String password) {
+        boolean res=false;
         String sql = "Select email, password from users where email=? and password=?";
         try {
             Class.forName("org.postgresql.Driver");
@@ -116,13 +117,11 @@ public class UserDao {
             st.setString(1, email);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return true;
-            }
+            res=rs.next();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return false;
+        return res;
     }
 
 }

@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             UserDao ud = new UserDao(email, password);
-            if (!ud.check(email, password)) {
+            if (ud.check(email, password)) {
                 RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
                 rd.forward(request, response);
             } else {
